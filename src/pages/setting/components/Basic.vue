@@ -1,5 +1,5 @@
 <template>
-  <v-list class="bg-surfaceVariant rounded-md mb-4">
+  <v-list class="bg-surfaceVariant rounded-md">
     <v-list-item>
       <v-list-item-title class="text-caption"> 主题 </v-list-item-title>
       <template #append>
@@ -10,6 +10,18 @@
       <v-list-item-title class="text-caption"> 主题色 </v-list-item-title>
       <template #append>
         <App-Select v-model="color" size="small" :items="colorItems" />
+      </template>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-title class="text-caption"> 选择语言 </v-list-item-title>
+      <template #append>
+        <AppSelect v-model="lang" size="small" :items="localeOptions" />
+      </template>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-title class="text-caption"> 选项卡外观 </v-list-item-title>
+      <template #append>
+        <Select size="small" :items="[]" />
       </template>
     </v-list-item>
   </v-list>
@@ -51,12 +63,36 @@ import type { APPEARANCE } from '@/store/setting'
 import { useSettingStore, WallpaperColor } from '@/store/setting'
 
 import AppSettingsGroup from './Group.vue'
-const { t } = useI18n()
 const setting = useSettingStore()
-const { customTheme, wallpaperColor } = storeToRefs(setting)
+const { customTheme, wallpaperColor, locale: lang } = storeToRefs(setting)
 const toast = useToast()
 const { applyTheme } = useDynamicChangeTheme()
 const upload = ref<HTMLInputElement>()
+
+const { t, locale } = useI18n({ useScope: 'global' })
+
+
+
+watch(lang, () => {
+  locale.value = lang.value
+})
+
+const localeOptions = computed(() => {
+  return [
+    {
+      title: t('common.zh-CN'),
+      value: 'zhCN',
+      activeClass: 'text-primary',
+      rounded: true,
+    },
+    {
+      title: t('common.en'),
+      value: 'en',
+      activeClass: 'text-primary',
+      rounded: true,
+    },
+  ]
+})
 const appearanceItems = computed(() => [
   {
     title: t('common.light'),

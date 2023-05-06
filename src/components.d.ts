@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     BFBtn: typeof import('./components/button/BFBtn.vue')['default']
     CardRow: typeof import('./components/layout/CardRow.vue')['default']
     Col: typeof import('./components/layout/Col.vue')['default']
+    ConfigModal: typeof import('./components/configModal.vue')['default']
     ControlCenterToggle: typeof import('./components/toggle/ControlCenterToggle.vue')['default']
     DrawerToggle: typeof import('./components/toggle/DrawerToggle.vue')['default']
     Heading: typeof import('./components/Heading.vue')['default']

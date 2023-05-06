@@ -1,7 +1,7 @@
 <template>
   <v-main class="overflow-y-auto h-100 main" :style="mainStyle">
     <clock />
-    <v-card width="200" height="200" color="bg-surfaceVariant" rounded="md"> </v-card>
+    <clock2 />
   </v-main>
 </template>
 <script setup lang="ts">
@@ -9,14 +9,16 @@ import { storeToRefs } from 'pinia'
 import { useTheme } from 'vuetify'
 
 import { Grid, useSettingStore } from '@/store/setting'
-import Clock from '@/widgets/clock.vue'
+import Clock from '@/widgets/clock_vertical/index.vue'
+import Clock2 from '@/widgets/clock_text/index.vue'
 
-const settingStore = storeToRefs(useSettingStore())
+const { grid } = storeToRefs(useSettingStore())
 const theme = useTheme()
 
 const mainStyle = computed(() => {
   return {
-    gridTemplateAreas: settingStore.grid.value === Grid.one ? 'time' : '',
+    gridTemplateColumns: `repeat(${grid.value.column}, 1fr)`,
+    gridTemplateRows: `repeat(${grid.value.row}, 1fr)`,
   }
 })
 </script>

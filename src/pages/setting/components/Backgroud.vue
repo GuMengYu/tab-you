@@ -1,5 +1,5 @@
 <template>
-  <v-list class="bg-surfaceVariant rounded-md mb-4">
+  <v-list class="bg-surfaceVariant rounded-md">
     <v-list-item>
       <v-list-item-title class="text-caption"> 背景类型 </v-list-item-title>
       <template #append>

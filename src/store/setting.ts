@@ -17,10 +17,10 @@ export enum WallpaperColor {
   BlueMountains = 'BlueMountains',
   Customize = 'Customize',
 }
-export enum Grid {
-  one,
-  two,
-  three,
+
+export interface Grid {
+  column: number
+  row: number
 }
 export interface SettingState {
   locale: string
@@ -29,6 +29,7 @@ export interface SettingState {
   wallpaperColor: WallpaperColor
   rail: boolean
   grid: Grid
+
 }
 export const useSettingStore = defineStore('setting', {
   state: () => {
@@ -40,7 +41,10 @@ export const useSettingStore = defineStore('setting', {
         wallpaperColor: WallpaperColor.GreenRockyMountains,
         customTheme: [],
         rail: true,
-        grid: Grid.one,
+        grid: {
+          row: 10,
+          column: 10,
+        },
       },
       { mergeDefaults: true }
     )
